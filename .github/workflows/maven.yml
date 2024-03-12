@@ -33,9 +33,14 @@ jobs:
       run: ls -la
     - name: Show contents of the target directory
       run: ls -la target
-    - name: Upload Maven build artifact
-      uses: actions/upload-artifact@v4
+    - name: Create a Release in a GitHub Action
+      uses: comnoco/create-release-action@v2.0.5
       with:
-        name: artifact
-        path: ./target/spring-poc.war
-        overwrite: true
+        tag_name: ${{ github.ref }}
+        release_name: Release ${{ github.ref }}
+        body: |
+          Changes in this Release
+          - First Change
+          - Second Change
+        draft: false
+        prerelease: false
